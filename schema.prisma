@@ -13,3 +13,20 @@ model User {
     password    String
     createdAt   DateTime @default(now())
 }
+
+model Order {
+  id          String @id @default(uuid())
+  code        String
+  description String
+  status      String
+  steps       OrderStep[]
+}
+
+model OrderStep {
+  id            String @id @default(uuid())
+  orderId       String
+  name          String
+  sequence      Int
+  completedAt   DateTime?
+  order         Order @relation(fields: [orderId], references: [id])
+}
