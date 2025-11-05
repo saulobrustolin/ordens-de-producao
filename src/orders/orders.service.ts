@@ -9,12 +9,13 @@ export class OrdersService {
         private prisma: PrismaService
     ) {}
 
-    async create(data: CreateOrder) {
+    async create(data: CreateOrder, userId: string) {
         const order = await this.prisma.order.create({
             data: {
                 code: data.code,
                 description: data.description,
                 status: data.status,
+                createdBy: userId,
                 steps: {
                     create: data.steps?.map((name, index) => ({
                         name,

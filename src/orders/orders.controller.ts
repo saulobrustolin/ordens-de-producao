@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Req, UseGuards } from "@nestjs/common";
 import { OrdersService } from "./orders.service";
 import { CreateOrder } from "./dto/create-order.dto";
 import { UpdateOrder } from "./dto/update-order.dto";
@@ -15,8 +15,8 @@ export class OrdersController {
     }
 
     @Post()
-    create(@Body() data: CreateOrder) {
-        return this.orderService.create(data);
+    create(@Body() data: CreateOrder, @Req() req: any) {
+        return this.orderService.create(data, req.user.userId);
     }
 
     @Get(':id')
