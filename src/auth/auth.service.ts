@@ -22,7 +22,7 @@ export class AuthService {
       },
     });
 
-    return { id: user.id, email: user.email, createdAt: user.createdAt };
+    return { id: user.id, email: user.email, createdAt: user.createdAt, role: user.role };
   }
 
   async login(data: LoginDto) {
@@ -35,7 +35,7 @@ export class AuthService {
     const valid = await bcrypt.compare(data.password, user.password);
     if (!valid) throw new UnauthorizedException('Credenciais inválidas');
 
-    const token = await this.jwt.signAsync({ sub: user.id, email: user.email });
+    const token = await this.jwt.signAsync({ sub: user.id, email: user.email, role: user.role });
     return { access_token: token };
   }
 }
