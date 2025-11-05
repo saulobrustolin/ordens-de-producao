@@ -2,8 +2,8 @@ import { Body, Controller, Get, HttpCode, Param, Patch, Req, UseGuards } from "@
 import { UsersService } from "./users.service";
 import { AuthGuard } from "@nestjs/passport";
 import { UpdateUser } from "./dto/update-user.dto";
-import { Roles } from "src/auth/decorators/roles.decorator";
-import { RolesGuard } from "src/auth/guards/roles.guard";
+import { Roles } from "../auth/decorators/roles.decorator";
+import { RolesGuard } from "../auth/guards/roles.guard";
 
 @Controller('users')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
